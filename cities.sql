@@ -26,3 +26,16 @@ CREATE TABLE geoname
   tz VARCHAR(40),
   modified_at DATE
 );
+
+CREATE INDEX name_idx 
+ON geoname 
+(name);
+
+CREATE INDEX names_lats_longs
+ON geoname 
+(name, lat, long);
+
+COPY geoname 
+FROM '/Users/jeffhall/Desktop/Software Engineering Career Track/Section_V/Exercises/49.3.2/coding-challenge-backend-c/data/cities_canada-usa.tsv'
+DELIMITER E'\t'
+CSV HEADER;
