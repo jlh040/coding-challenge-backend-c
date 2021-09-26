@@ -1,0 +1,28 @@
+DROP DATABASE IF EXISTS cities;
+
+CREATE DATABASE cities;
+
+\c cities;
+
+CREATE TABLE geoname
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  ascii VARCHAR(200) NOT NULL,
+  alt_name VARCHAR(5000) NOT NULL,
+  lat NUMERIC NOT NULL,
+  long NUMERIC NOT NULL,
+  feat_class CHARACTER(1) NOT NULL,
+  feat_code VARCHAR(10) NOT NULL,
+  country CHARACTER(2) NOT NULL,
+  cc2 VARCHAR(60) NOT NULL,
+  admin1 VARCHAR(20) NOT NULL,
+  admin2 VARCHAR(80) NOT NULL,
+  admin3 VARCHAR(20) NOT NULL,
+  admin4 VARCHAR(20) NOT NULL,
+  population BIGINT NOT NULL,
+  elevation INTEGER NOT NULL,
+  dem INTEGER NOT NULL,
+  tz VARCHAR(40) NOT NULL,
+  modified_at DATE NOT NULL
+);
