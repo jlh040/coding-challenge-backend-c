@@ -1,16 +1,30 @@
-var http = require('http');
-var port = process.env.PORT || 2345;
+"use strict";
 
-module.exports = http.createServer(function (req, res) {
-  res.writeHead(404, {'Content-Type': 'text/plain'});
+const express = require("express");
+const NotFoundError = require("./expressError");
+const suggestionsRoutes = require('./routes/suggestions');
 
-  if (req.url.indexOf('/suggestions') === 0) {
-    res.end(JSON.stringify({
-      suggestions: []
-    }));
-  } else {
-    res.end();
-  }
-}).listen(port, '127.0.0.1');
+const app = express();
 
-console.log('Server running at http://127.0.0.1:%d/suggestions', port);
+app.use(express.json());
+
+app.use("/suggestions", suggestionsRoutes);
+
+
+/** Handle 404 errors -- this matches everything */
+app.use(function (req, res, next) {
+  return next(new NotFoundError());
+});
+
+/** Generic error handler; anything unhandled goes here. */
+app.use(function (err, req, res, next) {
+  if (process.env.NODE_ENV !== "test") console.error(err.stack);
+  const status = err.status || 500;
+  const message = err.message;
+
+  return res.status(status).json({
+    error: { message, status },
+  });
+});
+
+module.exports = app;
