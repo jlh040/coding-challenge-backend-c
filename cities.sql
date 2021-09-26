@@ -9,7 +9,7 @@ CREATE TABLE geoname
   id SERIAL PRIMARY KEY,
   name VARCHAR(200) NOT NULL,
   ascii VARCHAR(200),
-  alt_name VARCHAR(5000),
+  alt_name TEXT,
   lat NUMERIC NOT NULL,
   long NUMERIC NOT NULL,
   feat_class CHARACTER(1),
