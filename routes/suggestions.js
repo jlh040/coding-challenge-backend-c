@@ -1,12 +1,13 @@
 "use strict";
 
 const express = require('express');
-const NotFoundError = require('../expressError');
-const router = new express.Router();
 const Suggestion = require('../models/suggestions');
 
+const router = new express.Router();
+
 router.get('/', async function(req, res, next) {
-  const suggestions = await Suggestion.findAll({name: 'san'});
+  const query = req.query.q;
+  const suggestions = await Suggestion.findAll({name: query});
   return res.json({ suggestions });
 })
 
