@@ -15,6 +15,7 @@ router.get('/', async function(req, res, next) {
   if (suggestions.length === 0) return next();
 
   suggestions = suggestions.map(suggestion => ({score: getScore(), ...suggestion}));
+  suggestions.sort((a, b) => b.score - a.score);
 
   return res.json({ suggestions });
 })
