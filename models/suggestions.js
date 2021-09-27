@@ -1,6 +1,7 @@
 "use strict";
 
 const db = require("../db");
+const sqlForFilteredSuggestions = require('../helpers/sql');
 const NotFoundError  = require("../expressError");
 
 class Suggestion {
@@ -23,9 +24,9 @@ class Suggestion {
               (country = 'US' OR country = 'CA')
               LIMIT 5`
     } else {
-      // query = sqlForFilteredSuggestions({ name, latitude, longitude});
+      query = sqlForFilteredSuggestions({ name, latitude, longitude});
     }
-
+  console.log(query)
     const suggestionsRes = await db.query(query);
     return suggestionsRes.rows;
   };
