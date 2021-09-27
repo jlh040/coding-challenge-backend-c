@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require("express");
-const NotFoundError = require("./expressError");
 const suggestionsRoutes = require('./routes/suggestions');
 
 const app = express();
@@ -13,17 +12,14 @@ app.use("/suggestions", suggestionsRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
-  return next(new NotFoundError());
+  return next({suggestions: []});
 });
 
 /** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
-  if (process.env.NODE_ENV !== "test") console.error(err.stack);
-  const status = err.status || 500;
-  const message = err.message;
-
+  const status = 404;
   return res.status(status).json({
-    error: { message, status },
+    suggestions: [],
   });
 });
 
