@@ -3,7 +3,7 @@
 - To actually use this API, first make sure you have [PostgreSQL](https://www.postgresql.org/) installed and are running it. Also, make sure you have [Node](https://nodejs.org/en/) installed.
 - Then type `git clone https://github.com/jlh040/coding-challenge-backend-c.git`
 - Then `cd` into the project folder and type `npm install`
-- (**First you will need to go into the cities.sql file and edit the path at the bottom to point to wherever the .tsv file is located**) Next, run `psql < cities.sql` to get the database setup.
+- (**You will need to go into the cities.sql file and edit the path at the bottom to point to wherever the .tsv file is located**) Next, run `psql < cities.sql` to get the database setup.
 - Enter `npm run start` to start the server, and then you can begin making GET requests from `http://127.0.0.1:2345/suggestions`
   - See below for acceptable query paramaters.
 
