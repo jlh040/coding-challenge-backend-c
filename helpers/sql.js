@@ -1,5 +1,5 @@
 function sqlForFilteredSuggestions({name, latitude, longitude}) {
-  let baseQuery = `SELECT name, lat AS "latitude", long AS "longitude" FROM geoname WHERE`;
+  let baseQuery = `SELECT ascii as "name", lat AS "latitude", long AS "longitude" FROM geoname WHERE`;
   let arrOfKeyAndVal = [];
 
   // make array containing 'key = value' statements
@@ -9,7 +9,7 @@ function sqlForFilteredSuggestions({name, latitude, longitude}) {
 
   // create array of sql clauses
   arrOfKeyAndVal = arrOfKeyAndVal.map(clause => {
-    if (clause.includes('name')) return `name ILIKE '${'%' + name + '%'}'`;
+    if (clause.includes('name')) return `ascii ILIKE '${'%' + name + '%'}'`;
     else if (clause.includes('latitude')) return `lat BETWEEN ${+latitude - 50} AND ${+latitude + 50}`;
     else if (clause.includes('longitude')) return `long BETWEEN ${+longitude - 50} AND ${+longitude + 50}`;
   });
