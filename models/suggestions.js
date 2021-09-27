@@ -21,7 +21,7 @@ class Suggestion {
               WHERE name ILIKE '%${name}%' AND
               population > 5000 AND
               (country = 'US' OR country = 'CA')
-              LIMIT 10`
+              LIMIT 5`
     } else {
       // query = sqlForFilteredSuggestions({ name, latitude, longitude});
     }
