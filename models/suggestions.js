@@ -16,18 +16,19 @@ class Suggestion {
     if (latitude === undefined && longitude === undefined) {
       query = `SELECT name,
                       lat AS "latitude",
-                      long AS "longitude",
+                      long AS "longitude"
               FROM geoname
               WHERE name ILIKE '%${name}%' AND
               population > 5000 AND
-              (country = US OR country = CA)
+              (country = 'US' OR country = 'CA')
               LIMIT 10`
     } else {
-      query = sqlForFilteredSuggestions({ name, latitude, longitude});
+      // query = sqlForFilteredSuggestions({ name, latitude, longitude});
     }
 
     const suggestionsRes = await db.query(query);
     return suggestionsRes.rows;
   };
+}
 
 module.exports = Suggestion;
