@@ -12,8 +12,10 @@ router.get('/', async function(req, res, next) {
   let longitude = req.query.longitude;
   let suggestions = await Suggestion.findAll({ name, latitude, longitude });
 
+  if (suggestions.length === 0) return next();
+
   suggestions = suggestions.map(suggestion => ({score: getScore(), ...suggestion}));
-  
+
   return res.json({ suggestions });
 })
 
